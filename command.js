@@ -1,5 +1,6 @@
 var fs = require("fs");
 var request = require("request");
+var chalk = require("chalk");
 
 module.exports = {
 	pwd: function() {
@@ -70,8 +71,17 @@ module.exports = {
 		}).join("\n");
 
 	},
-	curl: function(argument) {
-		// body...
+	curl: function(url, done) {
+		// async issue
+		request(url, function(err, res, body) {
+			if(err) {
+				console.log(chalk.bold.red(err));
+				throw err;
+			}
+			console.log(chalk.cyan(res), typeof body, chalk.magenta(body));
+			done(body.toString());
+		});
+
 	}
 
 

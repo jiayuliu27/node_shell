@@ -55,4 +55,8 @@ process.stdin.on("data", function(data) {
 	if(cmd[0] === "uniq") {
 		done(commands.uniq(cmd[1]));
 	}
+
+	if(cmd[0] === "curl") {
+		commands.curl(cmd[1], done);
+	}
 });
